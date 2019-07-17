@@ -10,32 +10,49 @@ client = AcsClient(os.environ['ACCESS_KEY_ID'], os.environ['ACCESS_KEY_SECRET'],
 request = CreateClusterV2Request()
 request.set_accept_format('json')
 
+request.set_EasEnable(False)
+request.set_IsOpenPublicIp(False)
+request.set_SshEnable(True)
+request.set_InstanceGeneration("ecs-3")
+request.set_KeyPairName("alibaba-de")
+request.set_Period(1)
+request.set_MachineType("ECS")
+request.set_MasterPwd("Lenin1922$")
+request.set_DepositType("HALF_MANAGED")
 request.set_ZoneId("eu-central-1a")
 request.set_SecurityGroupName("emr-security-group")
 request.set_ChargeType("PostPaid")
-request.set_VSwitchId("vsw-gw8ue96459069ui8pl8pc")
-request.set_KeyPairName("alibaba-de")
-request.set_VpcId("vpc-gw8b865ld4labpkquw3di")
 request.set_NetType("vpc")
-request.set_EmrVer("EMR-3.18.1")
+request.set_VSwitchId("vsw-gw8ue96459069ui8pl8pc")
+request.set_VpcId("vpc-gw8b865ld4labpkquw3di")
+request.set_AutoRenew(False)
+request.set_HighAvailabilityEnable(False)
 request.set_ClusterType("HADOOP")
+request.set_EmrVer("EMR-3.18.1")
 request.set_Name("test-cluster")
 request.set_HostGroups([
     {
+        "ChargeType": "PostPaid",
+        "AutoRenew": False,
+        "Period": 1,
+        "NodeCount": 2,
+        "DiskCount": 1,
         "HostGroupType": "MASTER",
-        "NodeCount": "1",
-        "InstanceType": "ecs.sn2.large",
-        "DiskType": "CLOUD_EFFICIENCY",
-        "DiskCapacity": "80",
-        "DiskCount": "1"
-    },
+        "HostGroupName": "Master Instance Group",
+        "SysDiskCapacity": 120,
+        "SysDiskType": "CLOUD_SSD",
+        "DiskCapacity": 80,
+        "DiskType": "CLOUD_SSD",
+        "InstanceType": "ecs.sn1.xlarge",
+        "VSwitchId": "vsw-gw8ue96459069ui8pl8pc"
+    }
+])
+request.set_OptionSoftWareLists(["LIVY"])
+request.set_UserInfos([
     {
-        "HostGroupType": "CORE",
-        "NodeCount": "2",
-        "InstanceType": "ecs.sn2.large",
-        "DiskType": "CLOUD_EFFICIENCY",
-        "DiskCapacity": "80",
-        "DiskCount": "4"
+        "UserName": "domdom01",
+        "UserId": "12345",
+        "Password": "Lenin1922$"
     }
 ])
 
